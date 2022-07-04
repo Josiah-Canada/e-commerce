@@ -2,7 +2,13 @@ const express = require('express');
 const routes = require('./routes');
 const mysql = require('mysql2');
 const { ConnectionError } = require('sequelize/types');
+const connection = mysql.createConnection()
 // import sequelize connection
+
+connection.query("SELECT * FROM Category", function(error, data) {
+// data is an array with table info
+
+});
 
 const db = mysql.createConnection(
   {
