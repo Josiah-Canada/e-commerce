@@ -7,7 +7,6 @@ const connection = mysql.createConnection()
 
 connection.query("SELECT * FROM Category", function(error, data) {
 // data is an array with table info
-
 });
 
 const db = mysql.createConnection(
