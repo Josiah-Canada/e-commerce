@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
-  Category.findOne()
+  Category.findOne(id)
   .then(function(categoryData) {
     res.json(categoryData)
   }).catch(err => {
