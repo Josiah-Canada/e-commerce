@@ -10,14 +10,17 @@ router.get('/', (req, res) => {
     .then((categories) => res.json(categories))
     .catch((err) => res.status(500).json(err));
 });
-// x
-router.get('/', (req, res) => {
+
+// <3
+router.get('/:id', (req, res) => {
   Category.findOne({
     include: [Product],
+    where: { id: req.params.id }
   })
     .then((categories) => res.json(categories))
     .catch((err) => res.status(500).json(err));
 });
+
 // <3
 router.post('/', (req, res) => {
   // create a new category
@@ -27,19 +30,21 @@ router.post('/', (req, res) => {
     res.status(500).json(err);
   })
 });
-// x
+
+// <3
 router.put('/:id', (req, res, next) => {
   // update a category by its `id` value
  Category.update(
   {category_name: req.body.category_name},
-  {where: req.params.id}
+  { where: { id: req.params.id } }
  )
  .then(function(rowsUpdated) {
   res.json(rowsUpdated)
  })
  .catch(next)
 });
-// x
+
+// <3
 router.delete('/:id', (req, res) => {
   // delete route
   Category.destroy({
