@@ -14,11 +14,14 @@ router.get('/', (req, res) => {
     res.status(500).json(err);
   })
 });
-// x
+
+// <3 
 router.get('/:id', (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
-  Tag.findOne()
+  Tag.findOne({
+    where: {id: req.params.id}
+  })
   .then(function(tagData) {
     res.json(tagData)
   }).catch(err => {
@@ -26,19 +29,21 @@ router.get('/:id', (req, res) => {
     res.status(500).json(err);
   })
 });
-// x return newly created id, but leaves tag_name null
+
+// <3
 router.post('/', (req, res) => {
   // create a new tag
  Tag.create({
-    new_category: req.body.Category
+    tag_name: req.body.tag_name
   }).then(function(tagData) {
-    res.json(tagData)
+    res.status(201).json(tagData)
   }).catch(err => {
     console.log(err);
     res.status(500).json(err);
   })
 });
-// x
+
+// <3
 router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
  Tag.update(req.body, {
@@ -54,7 +59,8 @@ router.put('/:id', (req, res) => {
     res.json(tagData);
   })
 });
-// x
+
+// <3
 router.delete('/:id', (req, res) => {
   // delete on tag by its `id` value
  Tag.destroy({

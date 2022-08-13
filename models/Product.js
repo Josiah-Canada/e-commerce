@@ -39,8 +39,7 @@ Product.init(
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
-          len: [10],
-          isInteger: true
+          isNumeric: true
         }
       }
     ,

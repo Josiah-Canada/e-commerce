@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
     .then((categories) => res.json(categories))
     .catch((err) => res.status(500).json(err));
 });
+
 // <3
 // get one product
 router.get('/:id', (req, res) => {
@@ -28,7 +29,7 @@ router.get('/:id', (req, res) => {
     .catch((err) => res.status(500).json(err));
 });
 
-// x
+// <3
 // create new product
 router.post('/', (req, res) => {
   /* req.body should look like this...
@@ -39,13 +40,9 @@ router.post('/', (req, res) => {
       tagIds: [1, 2, 3, 4]
     }
   */
-  Product.create(
-    {product_name: req.body.product_name},
-    {price: req.body.price},
-    {stock: req.body.stock},
-    {tagIds: req.body.tagIds([1,2,3,4])})
+  Product.create(req.body) 
     .then((product) => {
-      
+      console.log(req.body)
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
       if (req.body.tagIds.length) {
         const productTagIdArr = req.body.tagIds.map((tag_id) => {
@@ -66,7 +63,7 @@ router.post('/', (req, res) => {
     });
 });
 
-// x
+// <3
 // update product
 router.put('/:id', (req, res) => {
   // update product data
@@ -108,7 +105,8 @@ router.put('/:id', (req, res) => {
       res.status(400).json(err);
     });
 });
-// x 404
+
+// <3
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
   Product.destroy({
@@ -121,7 +119,7 @@ router.delete('/:id', (req, res) => {
         res.status(404).json({ message: 'No category found with this id' });
         return;
       }
-      res.json(productData);
+      res.status(204).json(productData);
     })
     .catch(err => {
       console.log(err);
